@@ -1,0 +1,16 @@
+{
+  "name": "rxjs-higher-order-streams",
+  "description": "RxJS Higher Order Streams Examples by JS Dżem. Enjoy the code 😎",
+  "scripts": {
+    "start": "parcel src/index.html"
+  },
+  "author": "Jakub Pusiak JS Dżem",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "rxjs": "^6.6.6"
+  }
+}
