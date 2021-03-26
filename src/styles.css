@@ -12,6 +12,8 @@ body {
   position: relative;
   margin: 100px auto;
   width: 490px;
+  height: 770px;
+  border: 3px solid #666;
 }
 
 .Point {
