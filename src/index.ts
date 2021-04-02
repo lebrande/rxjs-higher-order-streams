@@ -31,17 +31,17 @@ const columns$ = interval(200).pipe(
 // );
 
 // const rows$ = range(0, ROWS);
-const rows$ = interval(200).pipe(
-  take(ROWS),
-);
-// const rows$ = fromEvent(document, 'click').pipe(
-//   map((_, index) => index),
+// const rows$ = interval(200).pipe(
 //   take(ROWS),
 // );
+const rows$ = fromEvent(document, 'click').pipe(
+  map((_, index) => index),
+  take(ROWS),
+);
 
-const tiles$ = columns$.pipe(
-  map((x) => rows$.pipe(
-    map((y) => [x, y] as Coordinates),
+const tiles$ = rows$.pipe(
+  map((y) => columns$.pipe(
+    map((x) => [x, y] as Coordinates),
   )),
   mergeAll(),
 );
