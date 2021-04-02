@@ -1,11 +1,11 @@
-import { range } from 'rxjs';
-import { map, mergeAll } from 'rxjs/operators';
+import { range, interval, fromEvent } from 'rxjs';
+import { map, mergeAll, take } from 'rxjs/operators';
 import './styles.css';
 
 const gameMap = document.getElementById('gameMap');
 const TILE_SIZE = 70;
-const ROWS = 7;
-const COLS = 11;
+const COLS = 7;
+const ROWS = 11;
 
 type Coordinates = [x: number, y: number];
 
@@ -21,12 +21,27 @@ const renderTile = ([x, y]: Coordinates) => {
   gameMap.appendChild(point);
 }
 
-const rows$ = range(0, ROWS);
-const colums$ = range(0, COLS);
+// const columns$ = range(0, COLS);
+const columns$ = interval(200).pipe(
+  take(COLS),
+);
+// const columns$ = fromEvent(document, 'click').pipe(
+//   map((_, index) => index),
+//   take(COLS),
+// );
+
+// const rows$ = range(0, ROWS);
+// const rows$ = interval(200).pipe(
+//   take(ROWS),
+// );
+const rows$ = fromEvent(document, 'click').pipe(
+  map((_, index) => index),
+  take(ROWS),
+);
 
 const tiles$ = rows$.pipe(
-  map((x) => colums$.pipe(
-    map((y) => [x, y] as Coordinates),
+  map((y) => columns$.pipe(
+    map((x) => [x, y] as Coordinates),
   )),
   mergeAll(),
 );
